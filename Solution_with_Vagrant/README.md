@@ -8,7 +8,7 @@ Tools that need to be installed on your computer:
 ==============================================================================================================================
 
 Process:
-1) git clone repository
+1) clone git repository to your local
 
 2) go to the directory of the "Vagrantfile" in your terminal
 
