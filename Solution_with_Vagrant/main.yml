@@ -1,0 +1,32 @@
+---
+- hosts: trusty
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Copy your flask app file to the Vagrant servers
+    copy:
+      src: /$PWD/test.py
+      dest: /home/vagrant/test.py
+  - name: Download pip installer
+    get_url:
+      url: https://bootstrap.pypa.io/get-pip.py
+      dest: /tmp/get-pip.py
+  - name: Install pip
+    shell: |
+      /usr/bin/python /tmp/get-pip.py
+  - name: Create app folder
+    file:
+      name: /opt/pythonapp
+      state: directory
+      recurse: yes
+  - name: Install flask module
+    pip:
+      name: flask
+      state: latest
+  - name: Install gunicorn module
+    pip:
+      name: gunicorn
+      state: latest
+  - name: run flask app
+    shell: |
+      nohup python test.py > log.txt 2>&1 &
