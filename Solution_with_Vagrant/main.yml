@@ -7,26 +7,35 @@
     copy:
       src: /$PWD/test.py
       dest: /home/vagrant/test.py
-  - name: Download pip installer
-    get_url:
-      url: https://bootstrap.pypa.io/get-pip.py
-      dest: /tmp/get-pip.py
-  - name: Install pip
-    shell: |
-      /usr/bin/python /tmp/get-pip.py
-  - name: Create app folder
-    file:
-      name: /opt/pythonapp
-      state: directory
-      recurse: yes
+  # - name: run update
+  #   shell: |
+  #     apt update -y
+  - name: apt update and install pip3
+    apt:
+      name: python3-pip
+      update_cache: yes
+  # - name: Download pip installer
+  #   get_url:
+  #     url: https://bootstrap.pypa.io/get-pip.py
+  #     dest: /tmp/get-pip.py
+  # - name: Install pip
+  #   shell: |
+  #     /usr/bin/python /tmp/get-pip.py
+  # - name: Create app folder
+  #   file:
+  #     name: /opt/pythonapp
+  #     state: directory
+  #     recurse: yes
   - name: Install flask module
     pip:
+      executable: pip3
       name: flask
       state: latest
   - name: Install gunicorn module
     pip:
       name: gunicorn
-      state: latest
+      executable: pip3
+      # state: latest
   - name: run flask app
     shell: |
-      nohup python test.py > log.txt 2>&1 &
+      nohup python3 test.py > log.txt 2>&1 &
