@@ -4,9 +4,9 @@ app=Flask(__name__)
 
 @app.route("/")
 def test():
-    return ("THIS PROJECT CREATED BY MEHMET AKİF ALTUN using VAGRANT TOOL")
+    return ("CONGRATULATIONS. If you can see this page, it means that you have completed it successfully.")
 
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=80)
-    #app.run(debug=True)
+   
     
